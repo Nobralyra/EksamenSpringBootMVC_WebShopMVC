@@ -73,12 +73,23 @@ public class ProductRepository implements ICrudRepository<Product>
         return false;
     }
 
+    /**
+     * Kan kun slette "lige numre" hvis det kun er if statementet og fejler på alt det andet
+     * @param id
+     * @return
+     */
     @Override
     public boolean Delete(long id)
     {
         for(int i = 0; i < listOfProducts.size(); i++)
         {
             if (listOfProducts.get(i).getId() == id)
+            {
+                //Deletes the product
+                listOfProducts.remove(i);
+                return true;
+            }
+            else if (listOfProducts.get(i+1).getId() == id)
             {
                 //Deletes the product
                 listOfProducts.remove(i);
