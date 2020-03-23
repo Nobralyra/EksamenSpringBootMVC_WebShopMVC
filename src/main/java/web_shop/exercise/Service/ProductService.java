@@ -3,7 +3,8 @@ package web_shop.exercise.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web_shop.exercise.Model.Product;
-import web_shop.exercise.Repository.ProductRepository;
+import web_shop.exercise.Repository.ICrudRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,23 +13,23 @@ import java.util.List;
 public class ProductService
 {
     @Autowired
-    ProductRepository productRepository;
+    ICrudRepository<Product> iCrudRepository;
 
     public void Create(Product product)
     {
-        productRepository.Create(product);
+        iCrudRepository.Create(product);
     }
 
     public Product Read(long id)
     {
-        return productRepository.Read(id);
+        return iCrudRepository.Read(id);
     }
 
     public List<Product> ReadAll()
     {
         List<Product> productList = new ArrayList<>();
 
-        for (Product product: productRepository.ReadAll())
+        for (Product product: iCrudRepository.ReadAll())
         {
             productList.add(product);
         }
@@ -38,13 +39,13 @@ public class ProductService
     public boolean Update(Product product)
     {
         boolean updateOk = false;
-        updateOk = productRepository.Update(product);
+        updateOk = iCrudRepository.Update(product);
         return updateOk;
     }
 
     public boolean Delete(long id)
     {
 
-        return productRepository.Delete(id);
+        return iCrudRepository.Delete(id);
     }
 }
