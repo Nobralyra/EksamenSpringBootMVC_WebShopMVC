@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface ICrudRepository <T>
 {
-    void Create(T t);
-    T Read(long id);
-    List<T> ReadAll();
-    boolean Update(T t);
-    boolean Delete(long id);
+    void create(T t);
+    T findById(long id);
+    List<T> findAll();
+    boolean update(T t);
+    boolean delete(long id);
 }

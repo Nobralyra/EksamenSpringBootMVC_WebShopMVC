@@ -17,54 +17,63 @@ public class IndexController
     ProductService productService;
 
     @GetMapping({"", "/"})
-    public String IndexPage(Model model)
+    public String indexPage(Model model)
     {
-        //add all animals to view model from animalService
-        model.addAttribute("products", productService.ReadAll());
-        return ("/index");
+        //add/read all products to model with from productService
+        model.addAttribute("products", productService.readAll());
+        return "/index";
     }
 
     @GetMapping("/create")
-    public String Create(Product product, Model model)
+    public String create(Product product, Model model)
     {
         model.addAttribute("products", product);
         return "/create";
     }
 
+    /**
+     * @ModelAttribute binds form Product to model Product
+     * @param product
+     * @return String
+     */
     @PostMapping("/create")
-    public String CreateProduct(@ModelAttribute Product product)
+    public String createProduct(@ModelAttribute Product product)
     {
-        productService.Create(product);
+        productService.create(product);
         return "redirect:/";
     }
 
-    //use PathVariable to fetch id from list on web page
+    /**
+     * use PathVariable to fetch id from list
+     * @param id
+     * @param model
+     * @return String
+     */
     @GetMapping("/update/{id}")
-    public String Update(@PathVariable("id") long id, Model model)
+    public String update(@PathVariable("id") long id, Model model)
     {
-        //add product with id to the model view
-        model.addAttribute("products", productService.Read(id));
+        //add product with id to the model
+        model.addAttribute("products", productService.read(id));
         return "/update";
     }
 
     //update product
     @PostMapping("/update")
-    public String Update(@ModelAttribute Product product)
+    public String updateProduct(@ModelAttribute Product product)
     {
-        productService.Update(product);
+        productService.update(product);
         return "redirect:/";
     }
 
+    //use PathVariable to fetch id from list on web page
     @GetMapping("/delete/{id}")
-    public String slet(@PathVariable("id") long id, Model model)
+    public String delete(@PathVariable("id") long id, Model model)
     {
-
         //Should return the boolean value and send it to index
-
         try
         {
-            model.addAttribute("test", productService.Delete(id));
-            //Can not get this to index.html
+            model.addAttribute("test", productService.delete(id));
+            //Can not get this to index.html because redirect, and I want the list to be displayed after delete
             model.addAttribute("status", "Element " + id + " slettet");
         }
         catch (Exception e)
@@ -73,7 +82,6 @@ public class IndexController
             model.addAttribute("status", "Element " + id + " kunne ikke slettes!");
             return "/index";
         }
-
         return "redirect:/";
     }
 }

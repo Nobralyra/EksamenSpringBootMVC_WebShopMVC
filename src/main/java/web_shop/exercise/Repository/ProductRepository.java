@@ -25,18 +25,21 @@ public class ProductRepository implements ICrudRepository<Product>
 
     @Override
     //add new product to Product Collection
-    public void Create(Product product)
+    public void create(Product product)
     {
         listOfProducts.add(product);
     }
 
     @Override
-    public Product Read(long id)
+    public Product findById(long id)
     {
         //find element by id
         int i = 0;
         while (i < listOfProducts.size())
         {
+            //listOfProducts.get(i).getId()
+            // i is index of the element in list and getId is that elements id.
+            // id is given when calling the method
             if (listOfProducts.get(i).getId() == id)
             {
                 return listOfProducts.get(i);
@@ -50,21 +53,23 @@ public class ProductRepository implements ICrudRepository<Product>
     }
 
     @Override
-    public List<Product> ReadAll()
+    public List<Product> findAll()
     {
         return listOfProducts;
     }
 
     @Override
-    public boolean Update(Product product)
+    public boolean update(Product product)
     {
         //Find the element that should be updated in Product
-
         for(int i = 0; i < listOfProducts.size(); i++)
         {
+            //listOfProducts.get(i).getId()
+            // i is index of the element in list and getId is that elements id.
+            // product.getId() is given when calling the method
             if (listOfProducts.get(i).getId() == product.getId())
             {
-                //Opdates the element (Overrides the old product with the new)
+                //Opdates the index with product (Overrides the old product with the new)
                 listOfProducts.set(i, product);
                 return true;
             }
@@ -76,14 +81,17 @@ public class ProductRepository implements ICrudRepository<Product>
     /**
      * Kan kun slette "lige numre" hvis det kun er if statementet og fejler på alt det andet
      * @param id
-     * @return
+     * @return boolean
      */
     @Override
-    public boolean Delete(long id)
+    public boolean delete(long id)
     {
         int i = 0;
         while (i < listOfProducts.size())
         {
+            //listOfProducts.get(i).getId()
+            // i is index of the element in list and getId is that elements id.
+            // id is given when calling the method
             if (listOfProducts.get(i).getId() == id)
             {
                 listOfProducts.remove(i);

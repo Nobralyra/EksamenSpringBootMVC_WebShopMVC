@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import web_shop.exercise.Model.Product;
 import web_shop.exercise.Repository.ICrudRepository;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,37 +14,36 @@ public class ProductService
     @Autowired
     ICrudRepository<Product> iCrudRepository;
 
-    public void Create(Product product)
+    public void create(Product product)
     {
-        iCrudRepository.Create(product);
+        iCrudRepository.create(product);
     }
 
-    public Product Read(long id)
+    public Product read(long id)
     {
-        return iCrudRepository.Read(id);
+        return iCrudRepository.findById(id);
     }
 
-    public List<Product> ReadAll()
+    public List<Product> readAll()
     {
         List<Product> productList = new ArrayList<>();
 
-        for (Product product: iCrudRepository.ReadAll())
+        for (Product product: iCrudRepository.findAll())
         {
             productList.add(product);
         }
         return productList;
     }
 
-    public boolean Update(Product product)
+    public boolean update(Product product)
     {
         boolean updateOk = false;
-        updateOk = iCrudRepository.Update(product);
+        updateOk = iCrudRepository.update(product);
         return updateOk;
     }
 
-    public boolean Delete(long id)
+    public boolean delete(long id)
     {
-
-        return iCrudRepository.Delete(id);
+        return iCrudRepository.delete(id);
     }
 }
