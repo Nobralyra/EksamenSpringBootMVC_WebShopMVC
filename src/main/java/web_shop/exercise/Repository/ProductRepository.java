@@ -1,7 +1,7 @@
 package web_shop.exercise.Repository;
 
 import org.springframework.stereotype.Repository;
-import web_shop.exercise.Model.Product;
+import web_shop.exercise.Domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,10 @@ import java.util.List;
 @Repository
 public class ProductRepository implements ICrudRepository<Product>
 {
-    //Collection for handling test data
     private List<Product> listOfProducts = new ArrayList<>();
 
     public ProductRepository()
     {
-        //Fill in dummy data
         this.listOfProducts.add(new Product(1, "Kaffe", 45.0,"Lækker kaffe"));
         this.listOfProducts.add(new Product(2, "Te", 30,"Super te fra Kina"));
         this.listOfProducts.add(new Product(3, "Is", 22.0,"Kølig Magnum"));
@@ -24,7 +22,6 @@ public class ProductRepository implements ICrudRepository<Product>
     }
 
     @Override
-    //add new product to Product Collection
     public void create(Product product)
     {
         listOfProducts.add(product);
@@ -37,8 +34,7 @@ public class ProductRepository implements ICrudRepository<Product>
         int i = 0;
         while (i < listOfProducts.size())
         {
-            //listOfProducts.get(i).getId()
-            // i is index of the element in list and getId is that elements id.
+            // i = index of the element in list and getId is that elements id.
             // id is given when calling the method
             if (listOfProducts.get(i).getId() == id)
             {
@@ -64,34 +60,23 @@ public class ProductRepository implements ICrudRepository<Product>
         //Find the element that should be updated in Product
         for(int i = 0; i < listOfProducts.size(); i++)
         {
-            //listOfProducts.get(i).getId()
-            // i is index of the element in list and getId is that elements id.
             // product.getId() is given when calling the method
             if (listOfProducts.get(i).getId() == product.getId())
             {
-                //Opdates the index with product (Overrides the old product with the new)
+                //Updates the index with product (Overrides the old product with the new)
                 listOfProducts.set(i, product);
                 return true;
             }
         }
-        //element not found
         return false;
     }
 
-    /**
-     * Kan kun slette "lige numre" hvis det kun er if statementet og fejler på alt det andet
-     * @param id
-     * @return boolean
-     */
     @Override
     public boolean delete(long id)
     {
         int i = 0;
         while (i < listOfProducts.size())
         {
-            //listOfProducts.get(i).getId()
-            // i is index of the element in list and getId is that elements id.
-            // id is given when calling the method
             if (listOfProducts.get(i).getId() == id)
             {
                 listOfProducts.remove(i);
@@ -102,7 +87,6 @@ public class ProductRepository implements ICrudRepository<Product>
                 i++;
             }
         }
-        //element not found
         return false;
     }
 }

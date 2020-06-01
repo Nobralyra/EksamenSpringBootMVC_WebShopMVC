@@ -2,28 +2,32 @@ package web_shop.exercise.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web_shop.exercise.Model.Product;
+import web_shop.exercise.Domain.Product;
 import web_shop.exercise.Repository.ICrudRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductService
+public class ProductService implements IProductService
 {
+    //Runtime inject implemented class
     @Autowired
     ICrudRepository<Product> iCrudRepository;
 
+    @Override
     public void create(Product product)
     {
         iCrudRepository.create(product);
     }
 
+    @Override
     public Product read(long id)
     {
         return iCrudRepository.findById(id);
     }
 
+    @Override
     public List<Product> readAll()
     {
         List<Product> productList = new ArrayList<>();
@@ -35,6 +39,7 @@ public class ProductService
         return productList;
     }
 
+    @Override
     public boolean update(Product product)
     {
         boolean updateOk = false;
@@ -42,6 +47,7 @@ public class ProductService
         return updateOk;
     }
 
+    @Override
     public boolean delete(long id)
     {
         return iCrudRepository.delete(id);
