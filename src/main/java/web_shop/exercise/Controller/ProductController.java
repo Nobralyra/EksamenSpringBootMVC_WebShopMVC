@@ -41,13 +41,8 @@ public class ProductController
         IProductService.create(product);
         return "redirect:/";
     }
-
-    /**
-     * use @PathVariable to fetch id from list
-     * @param id
-     * @param model
-     * @return String
-     */
+    
+    //use @PathVariable to fetch id from list
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") long id, Model model)
     {
