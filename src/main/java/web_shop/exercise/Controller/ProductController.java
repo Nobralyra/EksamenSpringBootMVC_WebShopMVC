@@ -41,8 +41,8 @@ public class ProductController
         IProductService.create(product);
         return "redirect:/";
     }
-    
-    //use @PathVariable to fetch id from list
+
+    //Use @PathVariable to bound id from URL to method parameter
     @GetMapping("/update/{id}")
     public String update(@PathVariable("id") long id, Model model)
     {
@@ -56,8 +56,7 @@ public class ProductController
         IProductService.update(product);
         return "redirect:/";
     }
-
-    //use @PathVariable to fetch id from list
+    
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id)
     {
